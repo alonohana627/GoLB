@@ -2,6 +2,7 @@ package config
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"os"
 )
@@ -19,7 +20,12 @@ func Parse(filePath string) (*IteratorConfig, error) {
 		return nil, err
 	}
 
-	defer jsonFile.Close()
+	defer func(jsonFile *os.File) {
+		err = jsonFile.Close()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}(jsonFile)
 
 	byteValue, err := io.ReadAll(jsonFile)
 	if err != nil {
