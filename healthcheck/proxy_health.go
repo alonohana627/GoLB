@@ -27,7 +27,7 @@ type ProxyHealth struct {
 func NewProxyHealth(addr *url.URL) *ProxyHealth {
 	stop := make(chan bool)
 	return &ProxyHealth{
-		isAvailable: false,
+		isAvailable: true,
 		interval:    time.Second,
 		addr:        addr,
 		stop:        stop,

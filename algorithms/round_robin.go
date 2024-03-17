@@ -2,6 +2,7 @@ package algorithms
 
 import (
 	"GoLB/proxy"
+	"fmt"
 	"sync"
 )
 
@@ -27,6 +28,7 @@ func (r *RoundRobin) GetNextBackend() *proxy.Backend {
 	r.currentIndex = r.currentIndex % len(r.backends)
 
 	for !r.backends[r.currentIndex].IsAvailable() {
+		fmt.Println(r.backends[r.currentIndex].IsAvailable())
 		r.currentIndex++
 		r.currentIndex = r.currentIndex % len(r.backends)
 	}
