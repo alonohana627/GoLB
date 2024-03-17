@@ -10,7 +10,8 @@ type LoadBalancer struct {
 }
 
 func (l *LoadBalancer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	l.Iterator.GetNextBackend().ServeHTTP(w, r)
+	b := l.Iterator.GetNextBackend()
+	b.ServeHTTP(w, r)
 }
 
 func NewLoadBalancer(iter algorithms.Iterator) *LoadBalancer {
